@@ -1,0 +1,760 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ministry of Foreign Affairs and International Cooperation</title>
+    <script src="https://cdn.tailwindcss.com/3.4.16"></script>
+    <script>tailwind.config={theme:{extend:{colors:{primary:'#0c4b8e',secondary:'#d4a017'},borderRadius:{'none':'0px','sm':'4px',DEFAULT:'8px','md':'12px','lg':'16px','xl':'20px','2xl':'24px','3xl':'32px','full':'9999px','button':'8px'}}}}</script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/remixicon/4.6.0/remixicon.min.css">
+    <style>
+        :where([class^="ri-"])::before { content: "\f3c2"; }
+        body {
+            font-family: 'Poppins', sans-serif;
+        }
+        .hero-slider {
+            position: relative;
+            overflow: hidden;
+            height: 600px;
+        }
+        .hero-slide {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            opacity: 0;
+            transition: opacity 1s ease-in-out;
+        }
+        .hero-slide.active {
+            opacity: 1;
+        }
+        .hero-overlay {
+            background: linear-gradient(90deg, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0.4) 50%, rgba(0,0,0,0.2) 100%);
+        }
+        .slider-dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background-color: rgba(255, 255, 255, 0.5);
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        .slider-dot.active {
+            background-color: white;
+            transform: scale(1.2);
+        }
+        input[type="search"]::-webkit-search-decoration,
+        input[type="search"]::-webkit-search-cancel-button,
+        input[type="search"]::-webkit-search-results-button,
+        input[type="search"]::-webkit-search-results-decoration {
+            display: none;
+        }
+        input[type="number"]::-webkit-inner-spin-button,
+        input[type="number"]::-webkit-outer-spin-button {
+            -webkit-appearance: none;
+            margin: 0;
+        }
+        .dropdown {
+            position: relative;
+            display: inline-block;
+        }
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            background-color: white;
+            min-width: 250px;
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+            z-index: 50;
+            border-radius: 8px;
+            top: 100%;
+            left: 0;
+        }
+        .dropdown:hover .dropdown-content {
+            display: block;
+        }
+        .mobile-menu {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: white;
+            z-index: 100;
+            padding: 1rem;
+            overflow-y: auto;
+        }
+        .mobile-menu.active {
+            display: block;
+        }
+    </style>
+</head>
+<body class="bg-gray-50">
+    <!-- Top Header Bar -->
+    <div class="bg-primary text-white py-2">
+        <div class="container mx-auto px-4 flex justify-between items-center">
+            <div class="flex items-center space-x-4 text-sm">
+                <div class="flex items-center">
+                    <div class="w-4 h-4 flex items-center justify-center mr-1">
+                        <i class="ri-phone-line"></i>
+                    </div>
+                    <span>+855 23 214 441</span>
+                </div>
+                <div class="flex items-center">
+                    <div class="w-4 h-4 flex items-center justify-center mr-1">
+                        <i class="ri-mail-line"></i>
+                    </div>
+                    <span>info@mfaic.gov.kh</span>
+                </div>
+            </div>
+            <div class="flex items-center space-x-3">
+                <a href="#" class="w-7 h-7 flex items-center justify-center bg-white bg-opacity-20 rounded-full hover:bg-opacity-30 transition">
+                    <i class="ri-facebook-fill text-white"></i>
+                </a>
+                <a href="#" class="w-7 h-7 flex items-center justify-center bg-white bg-opacity-20 rounded-full hover:bg-opacity-30 transition">
+                    <i class="ri-twitter-fill text-white"></i>
+                </a>
+                <a href="#" class="w-7 h-7 flex items-center justify-center bg-white bg-opacity-20 rounded-full hover:bg-opacity-30 transition">
+                    <i class="ri-youtube-fill text-white"></i>
+                </a>
+                <a href="#" class="w-7 h-7 flex items-center justify-center bg-white bg-opacity-20 rounded-full hover:bg-opacity-30 transition">
+                    <i class="ri-instagram-fill text-white"></i>
+                </a>
+            </div>
+        </div>
+    </div>
+    <!-- Main Navigation Header -->
+    <header class="bg-white shadow-md">
+        <div class="container mx-auto px-4">
+            <div class="flex justify-between items-center py-4">
+                <div class="flex items-center">
+                    <a href="#" class="flex items-center">
+                        <div class="w-12 h-12 bg-primary rounded-full flex items-center justify-center mr-3">
+                            <span class="text-white font-['Pacifico'] text-lg">logo</span>
+                        </div>
+                        <div>
+                            <h1 class="text-primary font-semibold text-xl">Information of Cambodia</h1>
+                            <p class="text-gray-600 text-sm">write from student at beltei</p>
+                        </div>
+                    </a>
+                </div>
+
+                <!-- Desktop Navigation -->
+                <nav class="hidden lg:flex items-center space-x-6">
+                    <div class="dropdown">
+                        <a href="#" class="text-gray-700 font-medium hover:text-primary transition flex items-center">
+                            About Us
+                            <div class="w-4 h-4 flex items-center justify-center ml-1">
+                                <i class="ri-arrow-down-s-line"></i>
+                            </div>
+                        </a>
+                        <div class="dropdown-content mt-2">
+                            <div class="py-2 px-4">
+                                <a href="#" class="block py-2 px-2 text-gray-700 hover:bg-gray-100 hover:text-primary rounded">Overview</a>
+                                <a href="#" class="block py-2 px-2 text-gray-700 hover:bg-gray-100 hover:text-primary rounded">Mission & Vision</a>
+                                <a href="#" class="block py-2 px-2 text-gray-700 hover:bg-gray-100 hover:text-primary rounded">Organizational Structure</a>
+                                <a href="#" class="block py-2 px-2 text-gray-700 hover:bg-gray-100 hover:text-primary rounded">Leadership</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="dropdown">
+                        <a href="#" class="text-gray-700 font-medium hover:text-primary transition flex items-center">
+                            Diplomatic Relations
+                            <div class="w-4 h-4 flex items-center justify-center ml-1">
+                                <i class="ri-arrow-down-s-line"></i>
+                            </div>
+                        </a>
+                        <div class="dropdown-content mt-2">
+                            <div class="py-2 px-4">
+                                <a href="#" class="block py-2 px-2 text-gray-700 hover:bg-gray-100 hover:text-primary rounded">Bilateral Relations</a>
+                                <a href="#" class="block py-2 px-2 text-gray-700 hover:bg-gray-100 hover:text-primary rounded">Multilateral Relations</a>
+                                <a href="#" class="block py-2 px-2 text-gray-700 hover:bg-gray-100 hover:text-primary rounded">International Organizations</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="dropdown">
+                        <a href="#" class="text-gray-700 font-medium hover:text-primary transition flex items-center">
+                            Consular Services
+                            <div class="w-4 h-4 flex items-center justify-center ml-1">
+                                <i class="ri-arrow-down-s-line"></i>
+                            </div>
+                        </a>
+                        <div class="dropdown-content mt-2">
+                            <div class="py-2 px-4">
+                                <a href="#" class="block py-2 px-2 text-gray-700 hover:bg-gray-100 hover:text-primary rounded">Visa Information</a>
+                                <a href="#" class="block py-2 px-2 text-gray-700 hover:bg-gray-100 hover:text-primary rounded">Passport Services</a>
+                                <a href="#" class="block py-2 px-2 text-gray-700 hover:bg-gray-100 hover:text-primary rounded">Legalization Services</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="dropdown">
+                        <a href="#" class="text-gray-700 font-medium hover:text-primary transition flex items-center">
+                            News & Media
+                            <div class="w-4 h-4 flex items-center justify-center ml-1">
+                                <i class="ri-arrow-down-s-line"></i>
+                            </div>
+                        </a>
+                        <div class="dropdown-content mt-2">
+                            <div class="py-2 px-4">
+                                <a href="#" class="block py-2 px-2 text-gray-700 hover:bg-gray-100 hover:text-primary rounded">Press Releases</a>
+                                <a href="#" class="block py-2 px-2 text-gray-700 hover:bg-gray-100 hover:text-primary rounded">Speeches & Statements</a>
+                                <a href="#" class="block py-2 px-2 text-gray-700 hover:bg-gray-100 hover:text-primary rounded">Photo Gallery</a>
+                                <a href="#" class="block py-2 px-2 text-gray-700 hover:bg-gray-100 hover:text-primary rounded">Video Gallery</a>
+                            </div>
+                        </div>
+                    </div>
+                    <a href="#" class="text-gray-700 font-medium hover:text-primary transition">Contact</a>
+                </nav>
+
+                <div class="flex items-center space-x-4">
+                    <div class="relative hidden md:block">
+                        <input type="search" placeholder="Search..." class="pl-10 pr-4 py-2 border border-gray-300 rounded-full text-sm focus:outline-none focus:ring-2 focus:ring-primary focus:border-primary w-48">
+                        <div class="absolute left-3 top-1/2 transform -translate-y-1/2 w-4 h-4 flex items-center justify-center text-gray-400">
+                            <i class="ri-search-line"></i>
+                        </div>
+                    </div>
+                    <button class="lg:hidden w-10 h-10 flex items-center justify-center" id="mobile-menu-button">
+                        <i class="ri-menu-line text-xl"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Mobile Menu -->
+    <div class="mobile-menu" id="mobile-menu">
+        <div class="flex justify-between items-center mb-6">
+            <div class="flex items-center">
+                <div class="w-10 h-10 bg-primary rounded-full flex items-center justify-center mr-3">
+                    <span class="text-white font-['Pacifico'] text-base">logo</span>
+                </div>
+                <div>
+                    <h1 class="text-primary font-semibold text-lg">Ministry of Foreign Affairs</h1>
+                    <p class="text-gray-600 text-xs">and International Cooperation</p>
+                </div>
+            </div>
+            <button class="w-10 h-10 flex items-center justify-center" id="close-mobile-menu">
+                <i class="ri-close-line text-xl"></i>
+            </button>
+        </div>
+
+        <div class="mb-4">
+            <div class="relative">
+                <input type="search" placeholder="Search..." class="pl-10 pr-4 py-2 border border-gray-300 rounded-full text-sm focus:outline-none focus:ring-2 focus:ring-primary focus:border-primary w-full">
+                <div class="absolute left-3 top-1/2 transform -translate-y-1/2 w-4 h-4 flex items-center justify-center text-gray-400">
+                    <i class="ri-search-line"></i>
+                </div>
+            </div>
+        </div>
+
+        <nav class="space-y-4">
+            <div class="border-b border-gray-200 pb-2">
+                <button class="flex justify-between items-center w-full py-2 text-gray-700 font-medium hover:text-primary transition mobile-dropdown-toggle">
+                    <span>About Us</span>
+                    <div class="w-4 h-4 flex items-center justify-center">
+                        <i class="ri-arrow-down-s-line"></i>
+                    </div>
+                </button>
+                <div class="mobile-dropdown-content hidden pl-4 mt-2 space-y-2">
+                    <a href="#" class="block py-2 text-gray-700 hover:text-primary">Overview</a>
+                    <a href="#" class="block py-2 text-gray-700 hover:text-primary">Mission & Vision</a>
+                    <a href="#" class="block py-2 text-gray-700 hover:text-primary">Organizational Structure</a>
+                    <a href="#" class="block py-2 text-gray-700 hover:text-primary">Leadership</a>
+                </div>
+            </div>
+            <div class="border-b border-gray-200 pb-2">
+                <button class="flex justify-between items-center w-full py-2 text-gray-700 font-medium hover:text-primary transition mobile-dropdown-toggle">
+                    <span>Diplomatic Relations</span>
+                    <div class="w-4 h-4 flex items-center justify-center">
+                        <i class="ri-arrow-down-s-line"></i>
+                    </div>
+                </button>
+                <div class="mobile-dropdown-content hidden pl-4 mt-2 space-y-2">
+                    <a href="#" class="block py-2 text-gray-700 hover:text-primary">Bilateral Relations</a>
+                    <a href="#" class="block py-2 text-gray-700 hover:text-primary">Multilateral Relations</a>
+                    <a href="#" class="block py-2 text-gray-700 hover:text-primary">International Organizations</a>
+                </div>
+            </div>
+            <div class="border-b border-gray-200 pb-2">
+                <button class="flex justify-between items-center w-full py-2 text-gray-700 font-medium hover:text-primary transition mobile-dropdown-toggle">
+                    <span>Consular Services</span>
+                    <div class="w-4 h-4 flex items-center justify-center">
+                        <i class="ri-arrow-down-s-line"></i>
+                    </div>
+                </button>
+                <div class="mobile-dropdown-content hidden pl-4 mt-2 space-y-2">
+                    <a href="#" class="block py-2 text-gray-700 hover:text-primary">Visa Information</a>
+                    <a href="#" class="block py-2 text-gray-700 hover:text-primary">Passport Services</a>
+                    <a href="#" class="block py-2 text-gray-700 hover:text-primary">Legalization Services</a>
+                </div>
+            </div>
+            <div class="border-b border-gray-200 pb-2">
+                <button class="flex justify-between items-center w-full py-2 text-gray-700 font-medium hover:text-primary transition mobile-dropdown-toggle">
+                    <span>News & Media</span>
+                    <div class="w-4 h-4 flex items-center justify-center">
+                        <i class="ri-arrow-down-s-line"></i>
+                    </div>
+                </button>
+                <div class="mobile-dropdown-content hidden pl-4 mt-2 space-y-2">
+                    <a href="#" class="block py-2 text-gray-700 hover:text-primary">Press Releases</a>
+                    <a href="#" class="block py-2 text-gray-700 hover:text-primary">Speeches & Statements</a>
+                    <a href="#" class="block py-2 text-gray-700 hover:text-primary">Photo Gallery</a>
+                    <a href="#" class="block py-2 text-gray-700 hover:text-primary">Video Gallery</a>
+                </div>
+            </div>
+            <a href="#" class="block py-2 text-gray-700 font-medium hover:text-primary transition">Contact</a>
+        </nav>
+
+        <div class="mt-8 pt-6 border-t border-gray-200">
+            <div class="flex items-center space-x-4 text-sm mb-4">
+                <div class="flex items-center">
+                    <div class="w-4 h-4 flex items-center justify-center mr-1">
+                        <i class="ri-phone-line"></i>
+                    </div>
+                    <span>+855 23 214 441</span>
+                </div>
+                <div class="flex items-center">
+                    <div class="w-4 h-4 flex items-center justify-center mr-1">
+                        <i class="ri-mail-line"></i>
+                    </div>
+                    <span>info@mfaic.gov.kh</span>
+                </div>
+            </div>
+            <div class="flex items-center space-x-3">
+                <a href="#" class="w-8 h-8 flex items-center justify-center bg-primary rounded-full text-white">
+                    <i class="ri-facebook-fill"></i>
+                </a>
+                <a href="#" class="w-8 h-8 flex items-center justify-center bg-primary rounded-full text-white">
+                    <i class="ri-twitter-fill"></i>
+                </a>
+                <a href="#" class="w-8 h-8 flex items-center justify-center bg-primary rounded-full text-white">
+                    <i class="ri-youtube-fill"></i>
+                </a>
+                <a href="#" class="w-8 h-8 flex items-center justify-center bg-primary rounded-full text-white">
+                    <i class="ri-instagram-fill"></i>
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Hero Banner Slider -->
+    <div class="hero-slider">
+        <div class="hero-slide active" style="background-image: url('https://readdy.ai/api/search-image?query=A%20high-quality%20diplomatic%20meeting%20between%20international%20delegates%20in%20a%20grand%20conference%20hall%20with%20national%20flags%20visible%2C%20professional%20atmosphere%2C%20formal%20attire%2C%20handshakes%20between%20officials%2C%20official%20photographers%20capturing%20the%20moment%2C%20elegant%20interior%20with%20chandeliers%20and%20marble%20columns&width=1920&height=600&seq=1&orientation=landscape'); background-size: cover; background-position: center;">
+            <div class="hero-overlay w-full h-full flex items-center">
+                <div class="container mx-auto px-4">
+                    <div class="max-w-2xl text-white">
+                        <span class="inline-block bg-primary px-3 py-1 rounded-full text-sm font-medium mb-4">Diplomatic Relations</span>
+                        <h2 class="text-4xl font-bold mb-4">Cambodia Strengthens Diplomatic Ties with European Union</h2>
+                        <p class="text-lg mb-6">Foreign Minister meets with EU delegation to discuss trade agreements and regional cooperation initiatives</p>
+                        <a href="#" class="bg-white text-primary px-6 py-3 rounded-button font-medium hover:bg-opacity-90 transition inline-block whitespace-nowrap">Read More</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="hero-slide" style="background-image: url('https://readdy.ai/api/search-image?query=A%20formal%20signing%20ceremony%20between%20Asian%20and%20Western%20diplomats%2C%20official%20document%20signing%20with%20national%20flags%20in%20background%2C%20government%20officials%20in%20formal%20attire%2C%20press%20photographers%2C%20elegant%20government%20building%20interior%20with%20traditional%20architectural%20elements&width=1920&height=600&seq=2&orientation=landscape'); background-size: cover; background-position: center;">
+            <div class="hero-overlay w-full h-full flex items-center">
+                <div class="container mx-auto px-4">
+                    <div class="max-w-2xl text-white">
+                        <span class="inline-block bg-primary px-3 py-1 rounded-full text-sm font-medium mb-4">International Cooperation</span>
+                        <h2 class="text-4xl font-bold mb-4">New Trade Agreement Signed with Japan</h2>
+                        <p class="text-lg mb-6">Historic bilateral agreement expected to boost economic development and create new opportunities</p>
+                        <a href="#" class="bg-white text-primary px-6 py-3 rounded-button font-medium hover:bg-opacity-90 transition inline-block whitespace-nowrap">Read More</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="hero-slide" style="background-image: url('https://readdy.ai/api/search-image?query=ASEAN%20Summit%20meeting%20with%20leaders%20from%20Southeast%20Asian%20nations%20seated%20at%20a%20large%20round%20table%20with%20national%20flags%2C%20formal%20diplomatic%20setting%2C%20official%20photographers%2C%20press%20conference%20setup%2C%20elegant%20conference%20center%20with%20modern%20Asian%20design%20elements&width=1920&height=600&seq=3&orientation=landscape'); background-size: cover; background-position: center;">
+            <div class="hero-overlay w-full h-full flex items-center">
+                <div class="container mx-auto px-4">
+                    <div class="max-w-2xl text-white">
+                        <span class="inline-block bg-primary px-3 py-1 rounded-full text-sm font-medium mb-4">Regional Summit</span>
+                        <h2 class="text-4xl font-bold mb-4">Cambodia to Host ASEAN Regional Forum 2025</h2>
+                        <p class="text-lg mb-6">Preparations underway for major diplomatic event bringing together leaders from across Southeast Asia</p>
+                        <a href="#" class="bg-white text-primary px-6 py-3 rounded-button font-medium hover:bg-opacity-90 transition inline-block whitespace-nowrap">Read More</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slider Controls -->
+        <div class="absolute bottom-8 left-0 right-0 flex justify-center space-x-3 z-10">
+            <div class="slider-dot active" data-slide="0"></div>
+            <div class="slider-dot" data-slide="1"></div>
+            <div class="slider-dot" data-slide="2"></div>
+        </div>
+
+        <button class="absolute left-4 top-1/2 transform -translate-y-1/2 w-12 h-12 flex items-center justify-center bg-black bg-opacity-30 rounded-full text-white hover:bg-opacity-50 transition z-10" id="prev-slide">
+            <i class="ri-arrow-left-s-line text-2xl"></i>
+        </button>
+        <button class="absolute right-4 top-1/2 transform -translate-y-1/2 w-12 h-12 flex items-center justify-center bg-black bg-opacity-30 rounded-full text-white hover:bg-opacity-50 transition z-10" id="next-slide">
+            <i class="ri-arrow-right-s-line text-2xl"></i>
+        </button>
+    </div>
+
+    <!-- News & Updates Grid -->
+    <section class="py-16 bg-white">
+        <div class="container mx-auto px-4">
+            <div class="flex justify-between items-center mb-10">
+                <h2 class="text-3xl font-bold text-gray-800">Latest News & Updates</h2>
+                <a href="#" class="text-primary font-medium flex items-center hover:underline">
+                    View All News
+                    <div class="w-4 h-4 flex items-center justify-center ml-1">
+                        <i class="ri-arrow-right-line"></i>
+                    </div>
+                </a>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- News Item 1 -->
+                <div class="bg-white rounded-lg shadow-md overflow-hidden transition transform hover:-translate-y-1 hover:shadow-lg">
+                    <div class="h-56 overflow-hidden">
+                        <img src="https://readdy.ai/api/search-image?query=Cambodian%20Foreign%20Minister%20meeting%20with%20Chinese%20delegation%2C%20formal%20diplomatic%20meeting%20with%20national%20flags%2C%20officials%20in%20suits%20discussing%20at%20conference%20table%2C%20handshakes%2C%20neutral%20background%20with%20government%20buildings&width=600&height=400&seq=4&orientation=landscape" alt="Diplomatic Meeting" class="w-full h-full object-cover object-top">
+                    </div>
+                    <div class="p-6">
+                        <div class="flex items-center text-sm text-gray-500 mb-3">
+                            <div class="w-4 h-4 flex items-center justify-center mr-1">
+                                <i class="ri-calendar-line"></i>
+                            </div>
+                            <span>April 28, 2025</span>
+                        </div>
+                        <h3 class="text-xl font-semibold mb-3 text-gray-800">Cambodia and China Strengthen Strategic Partnership</h3>
+                        <p class="text-gray-600 mb-4">Foreign Ministers from both countries met to discuss enhanced cooperation in trade, infrastructure development, and cultural exchanges...</p>
+                        <a href="#" class="text-primary font-medium flex items-center hover:underline">
+                            Read More
+                            <div class="w-4 h-4 flex items-center justify-center ml-1">
+                                <i class="ri-arrow-right-line"></i>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- News Item 2 -->
+                <div class="bg-white rounded-lg shadow-md overflow-hidden transition transform hover:-translate-y-1 hover:shadow-lg">
+                    <div class="h-56 overflow-hidden">
+                        <img src="https://readdy.ai/api/search-image?query=United%20Nations%20meeting%20with%20Cambodian%20representatives%2C%20formal%20UN%20assembly%20hall%20with%20country%20placards%2C%20international%20delegates%20in%20formal%20attire%2C%20blue%20UN%20backdrop%2C%20professional%20diplomatic%20setting%20with%20microphones%20and%20translation%20headsets&width=600&height=400&seq=5&orientation=landscape" alt="UN Meeting" class="w-full h-full object-cover object-top">
+                    </div>
+                    <div class="p-6">
+                        <div class="flex items-center text-sm text-gray-500 mb-3">
+                            <div class="w-4 h-4 flex items-center justify-center mr-1">
+                                <i class="ri-calendar-line"></i>
+                            </div>
+                            <span>April 25, 2025</span>
+                        </div>
+                        <h3 class="text-xl font-semibold mb-3 text-gray-800">Cambodia Addresses UN General Assembly on Climate Change</h3>
+                        <p class="text-gray-600 mb-4">Cambodia's representative highlighted the country's commitment to sustainable development goals and called for increased international support...</p>
+                        <a href="#" class="text-primary font-medium flex items-center hover:underline">
+                            Read More
+                            <div class="w-4 h-4 flex items-center justify-center ml-1">
+                                <i class="ri-arrow-right-line"></i>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- News Item 3 -->
+                <div class="bg-white rounded-lg shadow-md overflow-hidden transition transform hover:-translate-y-1 hover:shadow-lg">
+                    <div class="h-56 overflow-hidden">
+                        <img src="https://readdy.ai/api/search-image?query=Cambodian%20visa%20application%20center%2C%20modern%20office%20interior%20with%20visa%20application%20counters%2C%20staff%20helping%20applicants%2C%20digital%20information%20displays%2C%20clean%20and%20professional%20environment%20with%20national%20emblems&width=600&height=400&seq=6&orientation=landscape" alt="Visa Services" class="w-full h-full object-cover object-top">
+                    </div>
+                    <div class="p-6">
+                        <div class="flex items-center text-sm text-gray-500 mb-3">
+                            <div class="w-4 h-4 flex items-center justify-center mr-1">
+                                <i class="ri-calendar-line"></i>
+                            </div>
+                            <span>April 22, 2025</span>
+                        </div>
+                        <h3 class="text-xl font-semibold mb-3 text-gray-800">New E-Visa System Launched for Foreign Visitors</h3>
+                        <p class="text-gray-600 mb-4">The Ministry has implemented a streamlined electronic visa application system to facilitate easier entry for tourists and business travelers...</p>
+                        <a href="#" class="text-primary font-medium flex items-center hover:underline">
+                            Read More
+                            <div class="w-4 h-4 flex items-center justify-center ml-1">
+                                <i class="ri-arrow-right-line"></i>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Quick Links Section -->
+    <section class="py-16 bg-gray-50">
+        <div class="container mx-auto px-4">
+            <h2 class="text-3xl font-bold text-center text-gray-800 mb-12">Quick Access</h2>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+                <!-- Quick Link 1 -->
+                <div class="bg-white rounded-lg shadow-md p-6 text-center transition transform hover:-translate-y-1 hover:shadow-lg">
+                    <div class="w-16 h-16 bg-primary bg-opacity-10 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <i class="ri-passport-line text-primary text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-3 text-gray-800">Visa Information</h3>
+                    <p class="text-gray-600 mb-4">Find details about visa requirements, application procedures, and processing times.</p>
+                    <a href="#" class="text-primary font-medium hover:underline">Learn More</a>
+                </div>
+
+                <!-- Quick Link 2 -->
+                <div class="bg-white rounded-lg shadow-md p-6 text-center transition transform hover:-translate-y-1 hover:shadow-lg">
+                    <div class="w-16 h-16 bg-primary bg-opacity-10 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <i class="ri-government-line text-primary text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-3 text-gray-800">Diplomatic Missions</h3>
+                    <p class="text-gray-600 mb-4">Access information about Cambodian embassies and consulates worldwide.</p>
+                    <a href="#" class="text-primary font-medium hover:underline">Learn More</a>
+                </div>
+
+                <!-- Quick Link 3 -->
+                <div class="bg-white rounded-lg shadow-md p-6 text-center transition transform hover:-translate-y-1 hover:shadow-lg">
+                    <div class="w-16 h-16 bg-primary bg-opacity-10 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <i class="ri-newspaper-line text-primary text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-3 text-gray-800">Press Releases</h3>
+                    <p class="text-gray-600 mb-4">Stay updated with official statements and announcements from the Ministry.</p>
+                    <a href="#" class="text-primary font-medium hover:underline">Learn More</a>
+                </div>
+
+                <!-- Quick Link 4 -->
+                <div class="bg-white rounded-lg shadow-md p-6 text-center transition transform hover:-translate-y-1 hover:shadow-lg">
+                    <div class="w-16 h-16 bg-primary bg-opacity-10 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <i class="ri-file-list-3-line text-primary text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-3 text-gray-800">Consular Services</h3>
+                    <p class="text-gray-600 mb-4">Information about document legalization, authentication, and other services.</p>
+                    <a href="#" class="text-primary font-medium hover:underline">Learn More</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Minister's Section -->
+    <section class="py-16 bg-white">
+        <div class="container mx-auto px-4">
+            <div class="flex flex-col lg:flex-row items-center gap-12">
+                <div class="lg:w-1/3">
+                    <div class="rounded-lg overflow-hidden shadow-lg">
+                        <img src="훈_마넷_캄보디아_총리_(2024년_5월_17일) (1).jpg" alt="Minister of Foreign Affairs" class="w-full h-full object-cover object-top">
+                    </div>
+                </div>
+                <div class="lg:w-2/3">
+                    <h2 class="text-3xl font-bold text-gray-800 mb-3">Samdech Hun Manet</h2>
+                    <p class="text-xl text-primary font-medium mb-6">Minister of Foreign Affairs and International Cooperation</p>
+                    <div class="prose max-w-none text-gray-600 mb-8">
+                        <p class="mb-4">Samdech Hun Manet (Khmer: ហ៊ុន ម៉ាណែត, Hŭn Manêt [hun maːnaet]; born 20 October 1977) is a Cambodian politician and military officer who has been serving as the prime minister of Cambodia since 2023, succeeding his father, Hun Sen.[1] He is also the vice president of the ruling Cambodian People's Party (CPP). Prior to his political appointment, he served in the Royal Cambodian Armed Forces (RCAF) as deputy commander-in-chief and the commander of the Royal Cambodian Army. Upon appointment as prime minister, he was granted the highest civilian honorary title of Samdech Moha Borvor Thipadei Hun Manet (Khmer Romanization Samțec Mahapavaradhipatī Hun Manet) (Khmer: សម្តេចមហាបវរធិបតី;[a] meaning "Great Lord and Supreme Leader Hun Manet").[2].</p>
+                        <p class="mb-4">Manet grew up and received his general education in Phnom Penh and later joined the armed forces in 1995. In the same year, he entered the United States Military Academy at West Point. After receiving his diploma in 1999, Manet became the first Cambodian to graduate from the academy.[3]</p>
+                        <p>ollowing the 2023 Cambodian general election, Hun Sen announced his resignation as prime minister on 26 July, officially making Manet the prime minister-designate.[4] Following the King Norodom Sihamoni's nomination, he and his cabinet were approved by the National Assembly unanimously and were formally sworn into office on 22 August 2023.</p>
+                    </div>
+                    <a href="#" class="bg-primary text-white px-6 py-3 rounded-button font-medium hover:bg-opacity-90 transition inline-block whitespace-nowrap">Read Full Message</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-white pt-16 pb-8">
+        <div class="container mx-auto px-4">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-12">
+                <!-- Column 1 -->
+                <div>
+                    <div class="flex items-center mb-6">
+                        <div class="w-10 h-10 bg-white rounded-full flex items-center justify-center mr-3">
+                            <span class="text-primary font-['Pacifico'] text-base">logo</span>
+                        </div>
+                        <div>
+                            <h3 class="font-semibold">Ministry of Foreign Affairs</h3>
+                            <p class="text-sm text-gray-400">and International Cooperation</p>
+                        </div>
+                    </div>
+                    <p class="text-gray-400 mb-6">The official website of the Ministry of Foreign Affairs and International Cooperation of the Kingdom of Cambodia.</p>
+                    <div class="flex items-center space-x-3">
+                        <a href="#" class="w-9 h-9 flex items-center justify-center bg-gray-800 rounded-full hover:bg-primary transition">
+                            <i class="ri-facebook-fill"></i>
+                        </a>
+                        <a href="#" class="w-9 h-9 flex items-center justify-center bg-gray-800 rounded-full hover:bg-primary transition">
+                            <i class="ri-twitter-fill"></i>
+                        </a>
+                        <a href="#" class="w-9 h-9 flex items-center justify-center bg-gray-800 rounded-full hover:bg-primary transition">
+                            <i class="ri-youtube-fill"></i>
+                        </a>
+                        <a href="#" class="w-9 h-9 flex items-center justify-center bg-gray-800 rounded-full hover:bg-primary transition">
+                            <i class="ri-instagram-fill"></i>
+                        </a>
+                    </div>
+                </div>
+                <!-- Column 2 -->
+                <div>
+                    <h3 class="text-lg font-semibold mb-6">Quick Links</h3>
+                    <ul class="space-y-3">
+                        <li><a href="#" class="text-gray-400 hover:text-white transition">About the Ministry</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition">Diplomatic Missions</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition">Consular Services</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition">Press Releases</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition">Photo Gallery</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition">Video Gallery</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition">Contact Us</a></li>
+                    </ul>
+                </div>
+
+                <!-- Column 3 -->
+                <div>
+                    <h3 class="text-lg font-semibold mb-6">Consular Information</h3>
+                    <ul class="space-y-3">
+                        <li><a href="#" class="text-gray-400 hover:text-white transition">Visa Information</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition">Passport Services</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition">Document Legalization</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition">Consular Protection</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition">Travel Advisories</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition">Foreign Embassies in Cambodia</a></li>
+                    </ul>
+                </div>
+
+                <!-- Column 4 -->
+                <div>
+                    <h3 class="text-lg font-semibold mb-6">Contact Information</h3>
+                    <ul class="space-y-4">
+                        <li class="flex">
+                            <div class="w-5 h-5 flex items-center justify-center mr-3 mt-1">
+                                <i class="ri-map-pin-line"></i>
+                            </div>
+                            <span class="text-gray-400">No. 3, Samdech Hun Sen Street, Sangkat Tonle Bassac, Khan Chamkamon, Phnom Penh, Cambodia</span>
+                        </li>
+                        <li class="flex items-center">
+                            <div class="w-5 h-5 flex items-center justify-center mr-3">
+                                <i class="ri-phone-line"></i>
+                            </div>
+                            <span class="text-gray-400">+855 23 214 441</span>
+                        </li>
+                        <li class="flex items-center">
+                            <div class="w-5 h-5 flex items-center justify-center mr-3">
+                                <i class="ri-mail-line"></i>
+                            </div>
+                            <span class="text-gray-400">info@mfaic.gov.kh</span>
+                        </li>
+                        <li class="flex items-center">
+                            <div class="w-5 h-5 flex items-center justify-center mr-3">
+                                <i class="ri-time-line"></i>
+                            </div>
+                            <span class="text-gray-400">Monday - Friday: 8:00 AM - 5:00 PM</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="border-t border-gray-800 pt-8">
+                <div class="flex flex-col md:flex-row justify-between items-center">
+                    <p class="text-gray-400 text-sm mb-4 md:mb-0">&copy; 2025 Ministry of Foreign Affairs and International Cooperation. All rights reserved.</p>
+                    <div class="flex space-x-6">
+                        <a href="#" class="text-gray-400 text-sm hover:text-white transition">Privacy Policy</a>
+                        <a href="#" class="text-gray-400 text-sm hover:text-white transition">Terms of Use</a>
+                        <a href="#" class="text-gray-400 text-sm hover:text-white transition">Sitemap</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Hero Slider Functionality
+            const slides = document.querySelectorAll('.hero-slide');
+            const dots = document.querySelectorAll('.slider-dot');
+            const prevBtn = document.getElementById('prev-slide');
+            const nextBtn = document.getElementById('next-slide');
+            let currentSlide = 0;
+            let slideInterval;
+
+            function showSlide(index) {
+                slides.forEach(slide => slide.classList.remove('active'));
+                dots.forEach(dot => dot.classList.remove('active'));
+                
+                slides[index].classList.add('active');
+                dots[index].classList.add('active');
+                currentSlide = index;
+            }
+
+            function nextSlide() {
+                let nextIndex = currentSlide + 1;
+                if (nextIndex >= slides.length) {
+                    nextIndex = 0;
+                }
+                showSlide(nextIndex);
+            }
+
+            function prevSlide() {
+                let prevIndex = currentSlide - 1;
+                if (prevIndex < 0) {
+                    prevIndex = slides.length - 1;
+                }
+                showSlide(prevIndex);
+            }
+
+            function startSlideInterval() {
+                slideInterval = setInterval(nextSlide, 5000);
+            }
+            function stopSlideInterval() {
+                clearInterval(slideInterval);
+            }
+
+            // Event listeners for slider controls
+            prevBtn.addEventListener('click', function() {
+                prevSlide();
+                stopSlideInterval();
+                startSlideInterval();
+            });
+
+            nextBtn.addEventListener('click', function() {
+                nextSlide();
+                stopSlideInterval();
+                startSlideInterval();
+            });
+
+            dots.forEach((dot, index) => {
+                dot.addEventListener('click', function() {
+                    showSlide(index);
+                    stopSlideInterval();
+                    startSlideInterval();
+                });
+            });
+
+            // Start automatic slider
+            startSlideInterval();
+
+            // Mobile menu functionality
+            const mobileMenuButton = document.getElementById('mobile-menu-button');
+            const closeMobileMenuButton = document.getElementById('close-mobile-menu');
+            const mobileMenu = document.getElementById('mobile-menu');
+            const mobileDropdownToggles = document.querySelectorAll('.mobile-dropdown-toggle');
+            mobileMenuButton.addEventListener('click', function() {
+                mobileMenu.classList.add('active');
+                document.body.style.overflow = 'hidden';
+            });
+
+            closeMobileMenuButton.addEventListener('click', function() {
+                mobileMenu.classList.remove('active');
+                document.body.style.overflow = '';
+            });
+
+            mobileDropdownToggles.forEach(toggle => {
+                toggle.addEventListener('click', function() {
+                    const content = this.nextElementSibling;
+                    const icon = this.querySelector('i');
+                    
+                    if (content.classList.contains('hidden')) {
+                        content.classList.remove('hidden');
+                        icon.classList.remove('ri-arrow-down-s-line');
+                        icon.classList.add('ri-arrow-up-s-line');
+                    } else {
+                        content.classList.add('hidden');
+                        icon.classList.remove('ri-arrow-up-s-line');
+                        icon.classList.add('ri-arrow-down-s-line');
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>
